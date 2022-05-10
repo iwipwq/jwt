@@ -9,11 +9,11 @@ app.use(express.json())
 
 const posts = [
     {
-        username: 'Kim',
+        username: 'KIM',
         title: '게시물 1'
     },
     {
-        username: 'Park',
+        username: 'PARK',
         title: '게시물 2'
     }
 ]
@@ -26,7 +26,7 @@ app.post('/login', (req,res) => {
     //Authenticate User
 
     const username = req.body.username
-    const user = { user: username }
+    const user = { name: username }
 
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
     res.json({ accessToken: accessToken })
@@ -39,6 +39,7 @@ function authenticateToken(req, res, next) {
 
     jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err, user) => {
         if (err) return res.sendStatus(403)
+        console.log("유저",user);
         req.user = user
         next()
     })
