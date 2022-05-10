@@ -13,13 +13,13 @@ const posts = [
         title: '게시물 1'
     },
     {
-        useranme: 'Park',
+        username: 'Park',
         title: '게시물 2'
     }
 ]
 
 app.get('/posts', authenticateToken,(req,res) => {
-    res.json(posts)
+    res.json(posts.filter(post => post.username === req.user.name))
 })
 
 app.post('/login', (req,res) => {
